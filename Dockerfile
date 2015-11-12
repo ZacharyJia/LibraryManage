@@ -9,8 +9,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
 RUN apt-get -y upgrade
 
-RUN apt-get -y install apache2
-RUN apt-get -y install php5
+RUN apt-get -y install apache2 php5 zip curl
 
 RUN curl -o /var/www/html/master.zip -L https://codeload.github.com/ZacharyJia/LibraryManage/zip/master
 RUN cd /var/www/html/ && unzip master.zip && mv LibraryManage-master/* . && rm -rf LibraryManage-master master.zip
