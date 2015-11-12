@@ -2,6 +2,6 @@
 
     echo "Hello Docker!!";
 
-    echo "Hello v0.1.1”;
+    echo "Hello v0.1.1";
     
 ?>
