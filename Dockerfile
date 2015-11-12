@@ -11,8 +11,5 @@ RUN apt-get -y upgrade
 
 RUN apt-get -y install apache2
 RUN apt-get -y install php5
-RUN apt-get -y install php5-curl
-
-COPY * /var/www/html
 
 EXPOSE 80
