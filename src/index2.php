@@ -1,5 +1,0 @@
-<?PHP
-
-    echo "Hello Docker!!";
-    
-?>
