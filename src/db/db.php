@@ -34,11 +34,11 @@
 	class ezSQL_mysqli extends ezSQLcore
 	{
 
-		var $dbuser =  SAE_MYSQL_USER  ;
-		var $dbpassword =  SAE_MYSQL_PASS ;
-		var $dbname =  SAE_MYSQL_DB ;
-		var $dbhost = SAE_MYSQL_HOST_M;
-		var $dbport =  SAE_MYSQL_PORT ;
+		var $dbuser =  'uaplVMmLAszPeYIc';
+		var $dbpassword =  'p5GfgsEqHVSuBrR8I' ;
+		var $dbname =   'eBsxhiu3HVWAk5Po';
+		var $dbhost = '10.10.26.58';
+		var $dbport =  3306 ;
 		var $encoding = "UTF-8";
 		var $rows_affected = false;
 
