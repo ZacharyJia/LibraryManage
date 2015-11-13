@@ -7,7 +7,7 @@
 	*  Desc..: PDO component (part of ezSQL databse abstraction library)
 	*
 	*/
-
+	include_once("ez_sql_core.php");
 	/**********************************************************************
 	*  ezSQL error strings - PDO
 	*/
