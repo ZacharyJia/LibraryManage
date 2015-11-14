@@ -1,5 +1,6 @@
 FROM daocloud.io/php:5.6-apache
 
+RUN apt-get install libmcrypt
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install mbstring 
 RUN docker-php-ext-install mcrypt 
