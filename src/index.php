@@ -9,6 +9,5 @@
     $db = getDB();
     $db->get_row("select * from test");
     $db->debug();
-    
-    
+
 ?>
