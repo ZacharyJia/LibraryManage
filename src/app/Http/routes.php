@@ -16,3 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('index','IndexController@dbTest');
+
+Route::get('login', 'IndexController@login');
+
+Route::post('loginAction', 'IndexController@loginAction');
