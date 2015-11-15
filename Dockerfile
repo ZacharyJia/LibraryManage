@@ -1,8 +1,12 @@
-FROM ganiutomo/docker-php-laravel:latest
-MAINTAINER Zachary Jia "jia199474@gmail.com"
+FROM daocloud.io/php:5.6-apache
 
-ENV DEBIAN_FRONTEND noninteractive
+RUn apt-get update
+RUN apt-get install libmcrypt-dev libssl-dev
+RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install mbstring 
+RUN docker-php-ext-install mcrypt 
+RUN docker-php-ext-install tokenizer 
+RUN docker-php-ext-install openssl
 
-EXPOSE 80
 
 COPY src/ /var/www/html/
