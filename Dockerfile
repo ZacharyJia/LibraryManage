@@ -7,8 +7,8 @@ RUN docker-php-ext-install mbstring
 RUN docker-php-ext-install mcrypt 
 RUN docker-php-ext-install tokenizer 
 
-RUN docker-php-ext-configure openssl
-RUN docker-php-ext-install openssl
+#RUN docker-php-ext-configure openssl
+#RUN docker-php-ext-install openssl
 
 
 COPY src/ /var/www/html/
