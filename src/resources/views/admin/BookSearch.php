@@ -10,6 +10,10 @@
 <?php include('nav.php'); ?>
 
 <div class="col-sm-10">
+    <div class="col-sm-12">
+        <h1 class="text-center">图书查询</h1>
+    </div>
+
     <form class="form-horizontal" action="bookSearchAction" method="post">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
         <div class="form-group">

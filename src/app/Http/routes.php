@@ -43,4 +43,17 @@ Route::group(['prefix' => 'admin', 'middleware'=>['auth']], function()
 
     Route::post('bookBorrowAction', 'Admin\BookController@bookBorrowAction');
 
+    Route::any('cardCreate', 'Admin\ReaderController@cardCreate');
+
+    Route::post('cardCreateAction', 'Admin\ReaderController@cardCreateAction');
+
+    Route::any('bookReturn', 'Admin\BookController@bookReturn');
+
+    Route::post('bookReturnAction', 'Admin\BookController@bookReturnAction');
+
+    Route::any('bookLoss', 'Admin\BookController@bookLoss');
+
+    Route::post('bookLossAction', 'Admin\BookController@bookLossAction');
+
+
 });

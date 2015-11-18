@@ -9,4 +9,5 @@ class Borrow extends Model
     protected $table = 'borrow';
     public $timestamps = false;
 
+
 }

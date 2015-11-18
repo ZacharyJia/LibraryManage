@@ -11,9 +11,11 @@ namespace App\Http\Controllers\Admin;
 use App\Borrow;
 use App\Category;
 use App\Book;
+use App\Level;
 use App\Reader;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends BaseController {
 
@@ -120,7 +122,6 @@ class BookController extends BaseController {
         {
             return $view->with("msg", $msg);
         }
-
     }
 
     public function bookInAction(Request $request)
@@ -175,11 +176,29 @@ class BookController extends BaseController {
         {
             return redirect('/admin/bookBorrow')->with("msg", "读者证编号有误，请检查！");
         }
-        $book = Book::where("isbn", '=', $isbn)->get();
+        $book = Book::where("isbn", '=', $isbn)->first();
         if ($book == null)
         {
             return redirect('/admin/bookBorrow')->with("msg", "图书ISBN有误，请检查！");
         }
+        if( $book['quantity-in'] - $book['quantity-out'] - $book['quantity-loss'] < 1)
+        {
+            return redirect('/admin/bookBorrow')->with("msg", "图书数量不足，请检查ISBN！");
+        }
+
+        $level = Level::find($reader['level']);
+        $borrowedBookNum = Borrow::where("reader-id", '=', $reader_id)
+                                ->where("returned", '=', false)
+                                ->where('loss', '<>', true)
+                                ->get()
+                                ->count();
+        if($borrowedBookNum >= $level['numbers'])
+        {
+            return redirect('/admin/bookBorrow')->with("msg", "该用户借书数量超过限制，请先归还部分图书！");
+        }
+
+        $book['quantity-out'] += 1;
+        $book->save();
 
         $borrow = new Borrow();
 
@@ -187,17 +206,108 @@ class BookController extends BaseController {
         $borrow['book-id'] = $book['book-id'];
         $borrow['date-borrow'] = $date;
 
+        $borrow->save();
+
         return redirect('/admin/bookBorrow')->with("msg", "借阅成功！");
     }
 
     public function bookReturn(Request $request)
     {
+        $username = $request->session()->get("username");
+        $msg = $request->session()->get("msg");
+
+        $view = view('/admin/BookReturn', ['username' => $username]);
+        if($msg == null)
+        {
+            return $view;
+        }
+        else
+        {
+            return $view->with("msg", $msg);
+        }
+    }
+
+    public function bookReturnAction(Request $request)
+    {
+        $date = date("Y-m-d");
+        $reader_id = $request->input("reader-id");
+        $isbn = $request->input("isbn");
+
+        $book = Book::where("isbn", '=', $isbn)->first();
+        if ($book == null)
+        {
+            return redirect('/admin/bookReturn')->with("msg", "读者证编号有误，请检查！");
+        }
+        if ($book['quantity-out'] + $book['quantity-loss'] + 1 > $book['quantity-in'])
+        {
+            return redirect('/admin/bookReturn')->with("msg", "图书信息有误，请检查！");
+        }
+
+        $borrow = Borrow::where("reader-id", '=', $reader_id)
+                        ->where("book-id", '=', $book['book-id'])
+                        ->where("returned", '=', 0)
+                        ->first();
+        if ($borrow == null)
+        {
+            return redirect('/admin/bookReturn')->with("msg", "信息有误，请检查！");
+        }
+
+        $book['quantity-out'] -= 1;
+        $book->save();
+        $borrow['date-return'] = $date;
+        $borrow['returned'] = true;
+        $borrow->save();
+
+        return redirect('/admin/bookReturn')->with("msg", "图书归还成功，欢迎继续使用！");
 
     }
 
     public function bookLoss(Request $request)
     {
+        $username = $request->session()->get("username");
+        $msg = $request->session()->get("msg");
 
+        $view = view('/admin/BookLoss', ['username' => $username]);
+        if($msg == null)
+        {
+            return $view;
+        }
+        else
+        {
+            return $view->with("msg", $msg);
+        }
     }
 
+    public function bookLossAction(Request $request)
+    {
+        $reader_id = $request->input("reader-id");
+        $isbn = $request->input("isbn");
+
+        $book = Book::where("isbn", '=', $isbn)->first();
+        if ($book == null)
+        {
+            return redirect('/admin/bookLoss')->with("msg", "读者证编号有误，请检查！");
+        }
+        if ($book['quantity-out'] + $book['quantity-loss'] + 1 > $book['quantity-in'])
+        {
+            return redirect('/admin/bookLoss')->with("msg", "图书信息有误，请检查！");
+        }
+
+        $borrow = Borrow::where("reader-id", '=', $reader_id)
+            ->where("book-id", '=', $book['book-id'])
+            ->where("returned", '=', 0)
+            ->first();
+        if ($borrow == null)
+        {
+            return redirect('/admin/bookLoss')->with("msg", "信息有误，请检查！");
+        }
+
+        $book['quantity-Loss'] += 1;
+        $book->save();
+        $borrow['loss'] = true;
+        $borrow->save();
+
+        return redirect('/admin/bookLoss')->with("msg", "图书挂失成功！");
+
+    }
 }

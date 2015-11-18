@@ -35,8 +35,8 @@
                     <li><a href="bookSearch">图书查询</a></li>
                     <li><a href="bookIn">图书入库</a></li>
                     <li><a href="bookBorrow">图书借阅</a></li>
-                    <li><a>图书归还</a></li>
-                    <li><a>图书挂失</a></li>
+                    <li><a href="bookReturn">图书归还</a></li>
+                    <li><a href="bookLoss">图书挂失</a></li>
                 </ul>
             </div>
         </div>
@@ -50,10 +50,10 @@
                 </a>
             </h4>
         </div>
-        <div id="ReaderManage" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+        <div id="ReaderManage" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
             <div class="panel-body">
                 <ul>
-                    <li><a>办理借书证</a></li>
+                    <li><a href="cardCreate">办理借书证</a></li>
                     <li><a>读者查询</a></li>
                     <li><a>借书证挂失</a></li>
                 </ul>
@@ -69,7 +69,7 @@
                 </a>
             </h4>
         </div>
-        <div id="SystemManage" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+        <div id="SystemManage" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
             <div class="panel-body">
                 <li><a>读者等级管理</a></li>
                 <li><a>逾期未还处理</a></li>
