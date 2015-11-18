@@ -28,7 +28,7 @@ class BookController extends BaseController {
     {
         $username = $request->session()->get("username");
         $categories = Category::all();
-        return view('admin\bookSearch', ['username' => $username, 'categories' => $categories]);
+        return view('admin\BookSearch', ['username' => $username, 'categories' => $categories]);
     }
 
     private function getCategoryArray($categories)
