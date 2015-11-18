@@ -39,5 +39,8 @@ Route::group(['prefix' => 'admin', 'middleware'=>['auth']], function()
 
     Route::post('bookInAction', 'Admin\BookController@bookInAction');
 
+    Route::any('bookBorrow', 'Admin\BookController@bookBorrow');
+
+    Route::post('bookBorrowAction', 'Admin\BookController@bookBorrowAction');
 
 });

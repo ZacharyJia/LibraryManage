@@ -8,8 +8,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Borrow;
 use App\Category;
 use App\Book;
+use App\Reader;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
@@ -49,7 +51,7 @@ class BookController extends BaseController {
                         ->where("author", "like", '%'. $author . '%')
                         ->where('publishing', 'like', '%'.$publishing.'%')
                         ->where('category-id', '=', $category)
-                        ->where('isbn', '=', $isbn)
+                        ->where('isbn', 'like', '%'.$isbn.'%')
                         ->paginate($num);
 
         $books->appends(["name" => $name, "author" => $author, "publishing" => $publishing, "category" => $category, "isbn" => $isbn]);
@@ -149,8 +151,43 @@ class BookController extends BaseController {
     public function bookBorrow(Request $request)
     {
         $username = $request->session()->get("username");
+        $msg = $request->session()->get("msg");
 
-        return view('/admin/BookBorrow', ['username' => $username]);
+        $view = view('/admin/BookBorrow', ['username' => $username]);
+        if($msg == null)
+        {
+            return $view;
+        }
+        else
+        {
+            return $view->with("msg", $msg);
+        }
+    }
+
+    public function bookBorrowAction(Request $request)
+    {
+        $date = date("Y-m-d");
+        $reader_id = $request->input("reader-id");
+        $isbn = $request->input("isbn");
+
+        $reader = Reader::find($reader_id);
+        if ($reader == null)
+        {
+            return redirect('/admin/bookBorrow')->with("msg", "读者证编号有误，请检查！");
+        }
+        $book = Book::where("isbn", '=', $isbn)->get();
+        if ($book == null)
+        {
+            return redirect('/admin/bookBorrow')->with("msg", "图书ISBN有误，请检查！");
+        }
+
+        $borrow = new Borrow();
+
+        $borrow['reader-id'] = $reader_id;
+        $borrow['book-id'] = $book['book-id'];
+        $borrow['date-borrow'] = $date;
+
+        return redirect('/admin/bookBorrow')->with("msg", "借阅成功！");
     }
 
     public function bookReturn(Request $request)

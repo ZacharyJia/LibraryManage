@@ -34,7 +34,7 @@
                 <ul>
                     <li><a href="bookSearch">图书查询</a></li>
                     <li><a href="bookIn">图书入库</a></li>
-                    <li><a>图书借阅</a></li>
+                    <li><a href="bookBorrow">图书借阅</a></li>
                     <li><a>图书归还</a></li>
                     <li><a>图书挂失</a></li>
                 </ul>
