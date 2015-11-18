@@ -25,10 +25,7 @@ class LoginCheck {
         {
             return redirect('reader/home');
         }
-        else
-        {
-            return redirect()->guest('login');
-        }
+        return $next($request);
     }
 
 

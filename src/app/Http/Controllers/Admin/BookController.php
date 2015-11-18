@@ -204,10 +204,12 @@ class BookController extends BaseController {
         $book->save();
 
         $borrow = new Borrow();
+        $shouldReturnDate = date("Y-m-d", strtotime("+".$level['days']." days"));
 
         $borrow['reader-id'] = $reader_id;
         $borrow['book-id'] = $book['book-id'];
         $borrow['date-borrow'] = $date;
+        $borrow['date-should-return'] = $shouldReturnDate;
 
         $borrow->save();
 

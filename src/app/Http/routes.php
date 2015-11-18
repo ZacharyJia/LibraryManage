@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::get('index','IndexController@dbTest');
 
-Route::get('login', ['middleware' => 'login', 'IndexController@login']);
+Route::get('login', ['middleware' => 'login', 'uses' => 'IndexController@login']);
 
 Route::post('loginAction', 'IndexController@loginAction');
 
@@ -25,6 +25,7 @@ Route::any('logoutAction', 'IndexController@logoutAction');
 
 Route::group(['prefix' => 'admin', 'middleware'=>['auth']], function()
 {
+
     Route::any('home', 'Admin\IndexController@home');
 
     Route::any('bookSearch', 'Admin\BookController@bookSearch');
@@ -70,6 +71,8 @@ Route::group(['prefix' => 'admin', 'middleware'=>['auth']], function()
     Route::any('readerFound', 'Admin\ReaderController@readerFound');
 
     Route::post('readerFoundAction', 'Admin\ReaderController@readerFoundAction');
+
+    Route::any('overTime', 'Admin\SystemController@overTime');
 
 
 });
