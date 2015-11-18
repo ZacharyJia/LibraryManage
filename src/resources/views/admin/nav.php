@@ -32,7 +32,7 @@
         <div id="BookManage" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
             <div class="panel-body">
                 <ul>
-                    <li><a>图书查询</a></li>
+                    <li><a href="bookSearch">图书查询</a></li>
                     <li><a>图书入库</a></li>
                     <li><a>图书借阅</a></li>
                     <li><a>图书归还</a></li>

@@ -11,6 +11,7 @@
 
 <div class="col-sm-10">
     <form class="form-horizontal" action="bookSearchAction" method="post">
+        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">图书名称</label>
             <div class="col-sm-7">
@@ -32,14 +33,20 @@
         <div class="form-group">
             <label for="category" class="col-sm-2 control-label">图书类别</label>
             <div class="col-sm-7">
-                <select class="form-control">
+                <select class="form-control" id="category" name="category">
                 <?php
-                foreach($categorys as $category)
+                foreach($categories as $category)
                 {
-                    echo '<option>' . $category . '</option>';
+                    echo '<option value="' . $category->id . '"">' . $category->category . '</option>';
                 }
                 ?>
                 </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">查询</button>
             </div>
         </div>
 

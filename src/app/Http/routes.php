@@ -29,5 +29,8 @@ Route::group(['prefix' => 'admin', 'middleware'=>['auth']], function()
 
     Route::any('bookSearch', 'Admin\BookController@bookSearch');
 
+    Route::any('bookSearchAction', 'Admin\BookController@bookSearchAction');
+
+    Route::get('bookDetail/{id}', 'Admin\BookController@bookDetail');
 
 });
