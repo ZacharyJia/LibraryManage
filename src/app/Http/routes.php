@@ -78,6 +78,14 @@ Route::group(['prefix' => 'admin', 'middleware'=>['AdminAuth']], function()
 
     Route::post('changePasswordAction', 'Admin\SystemController@changePasswordAction');
 
+    Route::any('levelManage', 'Admin\SystemController@levelManage');
+
+    Route::any('levelDel', 'Admin\SystemController@levelDel');
+
+    Route::any('levelAdd', 'Admin\SystemController@levelAdd');
+
+    Route::any('levelAddAction', 'Admin\SystemController@levelAddAction');
+
 });
 
 Route::group(['prefix' => 'reader', 'middleware'=>['UserAuth']], function()
@@ -91,4 +99,5 @@ Route::group(['prefix' => 'reader', 'middleware'=>['UserAuth']], function()
     route::any('advancedSearchAction', 'Reader\IndexController@advancedSearchAction');
 
     route::any('history', 'Reader\IndexController@history');
+
 });

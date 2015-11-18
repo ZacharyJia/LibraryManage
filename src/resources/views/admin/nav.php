@@ -73,7 +73,7 @@
         <div id="SystemManage" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
             <div class="panel-body">
                 <ul>
-                <!--<li><a>读者等级管理</a></li>-->
+                <li><a href="levelManage">读者等级管理</a></li>
                 <li><a href="overTime">逾期未还</a></li>
                 <li><a href="changePassword">密码修改</a></li>
                 </ul>

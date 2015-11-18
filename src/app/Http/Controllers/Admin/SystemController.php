@@ -8,6 +8,8 @@
 
 namespace app\Http\Controllers\Admin;
 
+use App\Level;
+use App\Reader;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use App\Borrow;
@@ -29,6 +31,73 @@ class SystemController extends BaseController {
         $borrows = Borrow::where("date-should-return", "<", DB::raw("curdate()"))
             ->paginate($num);
         return view("/admin/OverTime", ['username' => $username, "borrows" => $borrows]);
+    }
+
+    public function levelManage(Request $request)
+    {
+        $username = $request->session()->get("username");
+        $levels = Level::all();
+        $msg = $request->session()->get("msg");
+        $view = view('/admin/LevelManage', ['username' => $username, 'levels' => $levels]);
+        if ($msg == null)
+        {
+            return $view;
+        }
+        else
+        {
+            return $view->with("msg", $msg);
+        }
+    }
+
+    public function levelDel(Request $request)
+    {
+        $level = $request->input("level");
+
+        $readerNum = Reader::where('level', '=', $level)
+                        ->count();
+        if($readerNum > 0)
+        {
+            return redirect("/admin/levelManage")->with("msg", "还有用户在此等级，无法删除！");
+        }
+
+        $l = Level::find($level);
+
+        $l->delete();
+
+        return redirect("/admin/levelManage")->with("msg", "删除成功！");
+    }
+
+    public function levelAdd(Request $request)
+    {
+        $username = $request->session()->get("username");
+        $msg = $request->session()->get("msg");
+
+        $view = view('/admin/LevelAdd', ['username' => $username]);
+        if ($msg == null)
+        {
+            return $view;
+        }
+        else
+        {
+            return $view->with("msg", $msg);
+        }
+    }
+
+    public function levelAddAction(Request $request)
+    {
+        $level = $request->input("level");
+        $days = $request->input("days");
+        $numbers = $request->input("numbers");
+        $fee = $request->input("fee");
+
+        $l = new Level();
+        $l['level'] = $level;
+        $l['days'] = $days;
+        $l['numbers'] = $numbers;
+        $l['fee'] = $fee;
+
+        $l->save();
+        return redirect("/admin/levelManage")->with("msg", "添加成功！");
     }
 
     public function changePassword(Request $request)
@@ -66,4 +135,6 @@ class SystemController extends BaseController {
         $user->save();
         return redirect('/admin/changePassword')->with("msg", "修改成功！");
     }
+
+
 }
