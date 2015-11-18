@@ -175,6 +175,10 @@ class BookController extends BaseController {
         {
             return redirect('/admin/bookBorrow')->with("msg", "读者证编号有误，请检查！");
         }
+        if ($reader['loss'] == true)
+        {
+            return redirect('/admin/bookBorrow')->with("msg", "该借书证已挂失，请先解挂后再借书！");
+        }
         $book = Book::where("isbn", '=', $isbn)->first();
         if ($book == null)
         {

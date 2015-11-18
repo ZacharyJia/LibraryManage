@@ -165,5 +165,65 @@ class ReaderController extends BaseController {
         return redirect('/admin/readerDetail?id='.$id)->with("msg", "保存成功！");
     }
 
+    public function readerLoss(Request $request)
+    {
+        $username = $request->session()->get("username");
+        $msg = $request->session()->get("msg");
 
+        $view = view('/admin/ReaderLoss', ['username' => $username]);
+        if($msg == null)
+        {
+            return $view;
+        }
+        else
+        {
+            return $view->with("msg", $msg);
+        }
+    }
+
+    public function readerLossAction(Request $request)
+    {
+        $id = $request->input('reader-id');
+        $reader = Reader::find($id);
+        if($reader == null)
+        {
+            return redirect('/admin/readerLoss')->with("msg", "该读者证不存在，请重试！");
+        }
+        $reader['loss'] = true;
+        $reader->save();
+        return redirect('/admin/readerLoss')->with("msg", "读者证".$id."挂失成功！");
+    }
+
+    public function readerFound(Request $request)
+    {
+        $username = $request->session()->get("username");
+        $msg = $request->session()->get("msg");
+
+        $view = view('/admin/ReaderFound', ['username' => $username]);
+        if($msg == null)
+        {
+            return $view;
+        }
+        else
+        {
+            return $view->with("msg", $msg);
+        }
+    }
+
+    public function readerFoundAction(Request $request)
+    {
+        $id = $request->input('reader-id');
+        $reader = Reader::find($id);
+        if($reader == null)
+        {
+            return redirect('/admin/readerFound')->with("msg", "该读者证不存在，请重试！");
+        }
+        if($reader['loss'] == false)
+        {
+            return redirect('/admin/readerFound')->with("msg", "该读者证未挂失过！");
+        }
+        $reader['loss'] = false;
+        $reader->save();
+        return redirect('/admin/readerFound')->with("msg", "读者证".$id."解挂成功！");
+    }
 }
