@@ -26,7 +26,8 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \App\Http\Middleware\AuthCheck::class,
+        'AdminAuth' => \App\Http\Middleware\AdminAuthCheck::class,
+        'UserAuth' => \App\Http\Middleware\UserAuthCheck::class,
         'login' => \App\Http\Middleware\LoginCheck::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="admin/home">
+            <a class="navbar-brand" href="home">
                 图书馆管理系统——后台管理
             </a>
         </div>
@@ -72,9 +72,11 @@
         </div>
         <div id="SystemManage" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
             <div class="panel-body">
+                <ul>
                 <!--<li><a>读者等级管理</a></li>-->
                 <li><a href="overTime">逾期未还</a></li>
-                <li><a>密码修改</a></li>
+                <li><a href="changePassword">密码修改</a></li>
+                </ul>
             </div>
         </div>
     </div>

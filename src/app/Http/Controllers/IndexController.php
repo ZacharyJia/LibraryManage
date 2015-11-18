@@ -47,9 +47,8 @@ class IndexController extends BaseController
             else if($user['type'] == 1)
             {
 
-                return view("reader/home", ["user"=>$user]);
+                return redirect('/reader/home');
             }
-            return view("welcome",["msg"=>"登录成功！"]);
         }
         else
         {

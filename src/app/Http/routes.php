@@ -23,7 +23,7 @@ Route::post('loginAction', 'IndexController@loginAction');
 
 Route::any('logoutAction', 'IndexController@logoutAction');
 
-Route::group(['prefix' => 'admin', 'middleware'=>['auth']], function()
+Route::group(['prefix' => 'admin', 'middleware'=>['AdminAuth']], function()
 {
 
     Route::any('home', 'Admin\IndexController@home');
@@ -74,5 +74,19 @@ Route::group(['prefix' => 'admin', 'middleware'=>['auth']], function()
 
     Route::any('overTime', 'Admin\SystemController@overTime');
 
+    Route::any('changePassword', 'Admin\SystemController@changePassword');
 
+    Route::post('changePasswordAction', 'Admin\SystemController@changePasswordAction');
+
+});
+
+Route::group(['prefix' => 'reader', 'middleware'=>['UserAuth']], function()
+{
+    route::any('home', 'Reader\IndexController@home');
+
+    route::any('search', 'Reader\IndexController@search');
+
+    route::any('advancedSearch', 'Reader\IndexController@advancedSearch');
+
+    route::any('advancedSearchAction', 'Reader\IndexController@advancedSearchAction');
 });

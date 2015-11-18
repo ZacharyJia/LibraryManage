@@ -11,17 +11,13 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Closure;
 
-class AuthCheck {
+class AdminAuthCheck {
 
     public function handle(Request $request, Closure $next)
     {
         $isLogin = $request->session()->get("isLogin");
         $type = $request->session()->get("type");
         if ($isLogin == true && $type == 0)
-        {
-            return $next($request);
-        }
-        if ($isLogin == true && type == 1)
         {
             return $next($request);
         }
