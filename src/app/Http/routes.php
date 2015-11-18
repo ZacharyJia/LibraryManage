@@ -55,5 +55,13 @@ Route::group(['prefix' => 'admin', 'middleware'=>['auth']], function()
 
     Route::post('bookLossAction', 'Admin\BookController@bookLossAction');
 
+    Route::any('readerSearch', 'Admin\ReaderController@readerSearch');
+
+    Route::any('readerSearchAction', 'Admin\ReaderController@readerSearchAction');
+
+    Route::get('readerDetail', 'Admin\ReaderController@readerDetail');
+
+    Route::post('readerSaveAction', 'Admin\ReaderController@readerSaveAction');
+
 
 });

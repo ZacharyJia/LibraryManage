@@ -15,7 +15,6 @@ use App\Level;
 use App\Reader;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\DB;
 
 class BookController extends BaseController {
 

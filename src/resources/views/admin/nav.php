@@ -54,7 +54,7 @@
             <div class="panel-body">
                 <ul>
                     <li><a href="cardCreate">办理借书证</a></li>
-                    <li><a>读者查询</a></li>
+                    <li><a href="readerSearch">读者查询</a></li>
                     <li><a>借书证挂失</a></li>
                 </ul>
             </div>
