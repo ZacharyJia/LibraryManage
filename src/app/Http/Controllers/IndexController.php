@@ -5,7 +5,6 @@ use Illuminate\Http\Request;
 use DB;
 use App\User;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\Session;
 
 
 class IndexController extends BaseController
@@ -32,14 +31,36 @@ class IndexController extends BaseController
     public function loginAction(Request $request)
     {
         $user = User::where('username', '=', $request->input('username'))->first();
-        if ($user && $user['password'] == $request->input('password'))
+        $password = md5($request->input('password')."zachary");
+        if ($user && $user['password'] == $password)
         {
+            $request->session()->put("isLogin", true);
+            $request->session()->put("type", $user['type']);
+            $request->session()->put("username", $user['username']);
+
+            //管理员用户
+            if($user['type'] == 0)
+            {
+                return redirect('/admin/home');
+            }
+            //读者用户
+            else if($user['type'] == 1)
+            {
+
+                return view("reader/home", ["user"=>$user]);
+            }
             return view("welcome",["msg"=>"登录成功！"]);
         }
         else
         {
             return redirect('login')->with('errormsg', '用户名或密码错误!');
         }
+    }
+
+    public function logoutAction(Request $request)
+    {
+        $request->session()->clear();
+        return redirect('/login');
     }
     
 

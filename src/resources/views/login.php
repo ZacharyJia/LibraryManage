@@ -17,7 +17,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="index">请登录</a></li>
+                    <li><a href="login">请登录</a></li>
                     </li>
                 </ul>
                 </div><!-- /.navbar-collapse -->
