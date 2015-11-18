@@ -16,9 +16,14 @@ use Illuminate\Http\Request;
 
 class SystemController extends BaseController {
 
+    public function __construct()
+    {
+        date_default_timezone_set("Asia/Harbin");
+    }
+
     public function overTime(Request $request)
     {
-        $num = 1;
+        $num = 10;
         $username = $request->session()->get("username");
 
         $borrows = Borrow::where("date-should-return", "<", DB::raw("curdate()"))

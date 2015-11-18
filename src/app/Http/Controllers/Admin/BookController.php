@@ -18,6 +18,12 @@ use Illuminate\Routing\Controller as BaseController;
 
 class BookController extends BaseController {
 
+    public function __construct()
+    {
+        date_default_timezone_set("Asia/Harbin");
+    }
+
+
     public function bookSearch(Request $request)
     {
         $username = $request->session()->get("username");
@@ -243,14 +249,11 @@ class BookController extends BaseController {
         {
             return redirect('/admin/bookReturn')->with("msg", "读者证编号有误，请检查！");
         }
-        if ($book['quantity-out'] + $book['quantity-loss'] + 1 > $book['quantity-in'])
-        {
-            return redirect('/admin/bookReturn')->with("msg", "图书信息有误，请检查！");
-        }
 
         $borrow = Borrow::where("reader-id", '=', $reader_id)
                         ->where("book-id", '=', $book['book-id'])
-                        ->where("returned", '=', 0)
+                        ->where('loss', '=', false)
+                        ->where("returned", '=', false)
                         ->first();
         if ($borrow == null)
         {

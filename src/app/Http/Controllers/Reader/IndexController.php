@@ -9,11 +9,18 @@
 namespace app\Http\Controllers\Reader;
 
 use App\Book;
+use App\Borrow;
 use App\Category;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
 class IndexController extends BaseController {
+
+    public function __construct()
+    {
+        date_default_timezone_set("Asia/Harbin");
+    }
 
     public function home(Request $request)
     {
@@ -76,6 +83,24 @@ class IndexController extends BaseController {
         $categories = $this->getCategoryArray(Category::all());
         return view('/reader/BookList', ['username' => $username, 'books' => $books, 'categories' => $categories]);
 
+    }
+
+    public function history(Request $request)
+    {
+        $num = 10;
+        $username = $request->session()->get("username");
+
+        $user = User::where('username', '=', $username)->first();
+        if($user == null)
+        {
+            return redirect('/reader/home');
+        }
+
+        $borrows = Borrow::where('reader-id', '=', $user['reader-id'])
+                        ->orderBy('id')
+                        ->paginate($num);
+
+        return view('/reader/history', ['username' => $username, 'borrows' => $borrows]);
     }
 
 }

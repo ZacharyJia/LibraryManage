@@ -16,6 +16,12 @@ use Illuminate\Routing\Controller as BaseController;
 
 class IndexController extends BaseController
 {
+    public function __construct()
+    {
+        date_default_timezone_set("Asia/Harbin");
+    }
+
+
     public function home(Request $request)
     {
         $username = $request->session()->get("username");

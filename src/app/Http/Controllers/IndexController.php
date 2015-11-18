@@ -9,6 +9,12 @@ use Illuminate\Routing\Controller as BaseController;
 
 class IndexController extends BaseController
 {
+
+    public function __construct()
+    {
+        date_default_timezone_set("Asia/Harbin");
+    }
+
     public function dbTest()
     {
         //DB::insert("insert into `member-level`(days, numbers, fee) values(?, ?, ?)", [10, 2, 10.2]);

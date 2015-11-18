@@ -89,4 +89,6 @@ Route::group(['prefix' => 'reader', 'middleware'=>['UserAuth']], function()
     route::any('advancedSearch', 'Reader\IndexController@advancedSearch');
 
     route::any('advancedSearchAction', 'Reader\IndexController@advancedSearchAction');
+
+    route::any('history', 'Reader\IndexController@history');
 });
