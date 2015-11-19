@@ -28,7 +28,7 @@ class BookController extends BaseController {
     {
         $username = $request->session()->get("username");
         $categories = Category::all();
-        return view('admin\BookSearch', ['username' => $username, 'categories' => $categories]);
+        return view('admin/BookSearch', ['username' => $username, 'categories' => $categories]);
     }
 
     private function getCategoryArray($categories)
@@ -62,7 +62,7 @@ class BookController extends BaseController {
                         ->paginate($num);
 
         $books->appends(["name" => $name, "author" => $author, "publishing" => $publishing, "category" => $category, "isbn" => $isbn]);
-        return view('admin\BookList', ['username' => $username, 'books' => $books, 'categories' => $categories]);
+        return view('admin/BookList', ['username' => $username, 'books' => $books, 'categories' => $categories]);
     }
 
     public function bookDetail(Request $request)
@@ -74,7 +74,7 @@ class BookController extends BaseController {
         $id = $request->input("id");
         $book = Book::find($id);
 
-        $view = view('admin\BookDetail', ['username' => $username, "categories" => $categories, "book" => $book]);
+        $view = view('admin/BookDetail', ['username' => $username, "categories" => $categories, "book" => $book]);
         if ($msg == null)
         {
             return $view;
