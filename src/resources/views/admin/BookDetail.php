@@ -55,9 +55,13 @@
         <div class="form-group">
             <label for="date-in" class="col-sm-2 control-label">入库时间</label>
             <div class="col-sm-7">
-                <input type="text" class="form-control" id="date-in" name="date-in" placeholder="入库时间" value="<?php echo $book['date-in']; ?>">
+                <input type="text" readonly class="form-control form_datetime" id="date-in" name="date-in" placeholder="入库时间" value="<?php echo $book['date-in']; ?>">
             </div>
         </div>
+        <script type="text/javascript">
+            $(".form_datetime").datetimepicker({format: 'yyyy-mm-dd', minView: 'month', autoclose: true});
+        </script>
+
         <div class="form-group">
             <label for="quantity-in" class="col-sm-2 control-label">总数量</label>
             <div class="col-sm-7">

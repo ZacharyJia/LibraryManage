@@ -13,7 +13,6 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a>您好，<?php echo $username; ?></a></li>
                 <li><a href="../logoutAction">退出登录</a></li>
-                </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div>

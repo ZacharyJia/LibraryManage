@@ -37,9 +37,12 @@
         <div class="form-group">
             <label for="birthday" class="col-sm-2 control-label">出生日期</label>
             <div class="col-sm-7">
-                <input type="text" class="form-control" id="birthday" name="birthday" placeholder="例：1994-08-10">
+                <input type="text" readonly class="form-control form_datetime" id="birthday" name="birthday" placeholder="例：1994-08-10">
             </div>
         </div>
+        <script type="text/javascript">
+            $(".form_datetime").datetimepicker({format: 'yyyy-mm-dd', minView: 'month', autoclose: true});
+        </script>
         <div class="form-group">
             <label for="phone" class="col-sm-2 control-label">电话号码</label>
             <div class="col-sm-7">
