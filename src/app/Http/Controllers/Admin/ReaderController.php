@@ -92,7 +92,7 @@ class ReaderController extends BaseController {
     public function readerSearch(Request $request)
     {
         $username = $request->session()->get("username");
-        return view('admin/readerSearch', ['username' => $username]);
+        return view('admin/ReaderSearch', ['username' => $username]);
     }
 
     public function readerSearchAction(Request $request)
