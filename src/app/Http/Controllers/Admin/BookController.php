@@ -260,7 +260,7 @@ class BookController extends BaseController {
             return redirect('/admin/bookReturn')->with("msg", "信息有误，请检查！");
         }
 
-        $book['quantity-out'] -= 1;
+        $book['quantity-out'] = $book['quantity-out'] - 1;
         $book->save();
         $borrow['date-return'] = $date;
         $borrow['returned'] = true;
@@ -310,6 +310,7 @@ class BookController extends BaseController {
             return redirect('/admin/bookLoss')->with("msg", "信息有误，请检查！");
         }
 
+        $book['quantity-out'] = $book['quantity-out'] - 1;
         $book['quantity-Loss'] += 1;
         $book->save();
         $borrow['loss'] = true;
