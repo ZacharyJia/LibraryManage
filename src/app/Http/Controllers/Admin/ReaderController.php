@@ -92,7 +92,7 @@ class ReaderController extends BaseController {
     public function readerSearch(Request $request)
     {
         $username = $request->session()->get("username");
-        return view('admin\readerSearch', ['username' => $username]);
+        return view('admin/readerSearch', ['username' => $username]);
     }
 
     public function readerSearchAction(Request $request)
@@ -108,7 +108,7 @@ class ReaderController extends BaseController {
                         ->paginate($num);
 
         $readers->appends(['reader-name' => $reader_name, 'reader-id' => $reader_id]);
-        return view('admin\ReaderList', ['username' => $username, 'readers' => $readers]);
+        return view('admin/ReaderList', ['username' => $username, 'readers' => $readers]);
     }
 
     public function readerDetail(Request $request)
@@ -121,7 +121,7 @@ class ReaderController extends BaseController {
             ->first();
         $levels = Level::all();
 
-        $view = view('admin\ReaderDetail', ['username' => $username, 'reader' => $reader, 'user' => $user, "levels" => $levels]);
+        $view = view('admin/ReaderDetail', ['username' => $username, 'reader' => $reader, 'user' => $user, "levels" => $levels]);
 
         if ($msg == null) {
             return $view;
