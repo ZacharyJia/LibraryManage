@@ -21,7 +21,6 @@ class IndexController extends BaseController
         date_default_timezone_set("Asia/Harbin");
     }
 
-
     public function home(Request $request)
     {
         $username = $request->session()->get("username");

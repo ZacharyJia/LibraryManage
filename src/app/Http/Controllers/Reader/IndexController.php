@@ -22,18 +22,21 @@ class IndexController extends BaseController {
         date_default_timezone_set("Asia/Harbin");
     }
 
+    //主页面
     public function home(Request $request)
     {
         $username = $request->session()->get("username");
         return view("/reader/home", ['username' => $username]);
     }
 
+    //普通搜索，提供一个关键字，在多个字段中搜索
     public function search(Request $request)
     {
         $num = 10;
         $username = $request->session()->get("username");
         $keyword = $request->input("keyword");
 
+        //生成查询
         $books = Book::where('book-name', 'like', '%'.$keyword.'%')
                     ->where('author', 'like', '%'.$keyword.'%')
                     ->where('isbn', 'like', '%'.$keyword.'%')
@@ -54,6 +57,7 @@ class IndexController extends BaseController {
         return $result;
     }
 
+    //高级搜索，指定搜索字段
     public function advancedSearch(Request $request)
     {
         $username = $request->session()->get("username");
@@ -61,6 +65,7 @@ class IndexController extends BaseController {
         return view('/reader/AdvancedSearch', ['username' => $username, 'categories' => $categories]);
     }
 
+    //高级搜索处理
     public function advancedSearchAction(Request $request)
     {
         $num = 10;
@@ -85,6 +90,7 @@ class IndexController extends BaseController {
 
     }
 
+    //借阅历史
     public function history(Request $request)
     {
         $num = 10;

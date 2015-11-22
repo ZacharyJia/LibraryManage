@@ -23,6 +23,7 @@ class SystemController extends BaseController {
         date_default_timezone_set("Asia/Harbin");
     }
 
+    //逾期未还页面
     public function overTime(Request $request)
     {
         $num = 10;
@@ -33,6 +34,7 @@ class SystemController extends BaseController {
         return view("/admin/OverTime", ['username' => $username, "borrows" => $borrows]);
     }
 
+    //等级管理
     public function levelManage(Request $request)
     {
         $username = $request->session()->get("username");
@@ -49,6 +51,7 @@ class SystemController extends BaseController {
         }
     }
 
+    //等级删除
     public function levelDel(Request $request)
     {
         $level = $request->input("level");
@@ -67,6 +70,7 @@ class SystemController extends BaseController {
         return redirect("/admin/levelManage")->with("msg", "删除成功！");
     }
 
+    //添加新等级
     public function levelAdd(Request $request)
     {
         $username = $request->session()->get("username");
@@ -100,6 +104,7 @@ class SystemController extends BaseController {
         return redirect("/admin/levelManage")->with("msg", "添加成功！");
     }
 
+    //密码修改页面
     public function changePassword(Request $request)
     {
         $username = $request->session()->get("username");
@@ -116,6 +121,7 @@ class SystemController extends BaseController {
         }
     }
 
+    //密码修改
     public function changePasswordAction(Request $request)
     {
         $username = $request->session()->get("username");

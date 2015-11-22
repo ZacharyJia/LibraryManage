@@ -23,7 +23,7 @@ class ReaderController extends BaseController {
         date_default_timezone_set("Asia/Harbin");
     }
 
-
+    //读者证办理页面
     public function cardCreate(Request $request)
     {
         $msg = $request->session()->get("msg");
@@ -41,6 +41,8 @@ class ReaderController extends BaseController {
         }
     }
 
+    //创建读者证
+    //分别在reader表和user表插入新的纪录
     public function cardCreateAction(Request $request)
     {
         $reader_name = $request->input("reader-name");
@@ -54,6 +56,8 @@ class ReaderController extends BaseController {
         $username = $request->input("username");
         $password = md5($request->input('password')."zachary");
 
+        //为了防止出现数据不一致的情况，使用事务进行处理
+        //如果出现错误的话，就将操作回滚，正常则提交
         DB::beginTransaction();
 
         try {
@@ -89,6 +93,7 @@ class ReaderController extends BaseController {
         return redirect('/admin/cardCreate')->with("msg", "创建成功！新的读者证编号为：".$reader['reader-id']);
     }
 
+    //读者搜索页面
     public function readerSearch(Request $request)
     {
         $username = $request->session()->get("username");
@@ -111,6 +116,7 @@ class ReaderController extends BaseController {
         return view('admin/ReaderList', ['username' => $username, 'readers' => $readers]);
     }
 
+    //读者信息页面
     public function readerDetail(Request $request)
     {
         $msg = $request->session()->get("msg");
@@ -131,6 +137,7 @@ class ReaderController extends BaseController {
 
     }
 
+    //保存读者信息
     public function readerSaveAction(Request $request)
     {
         $id = $request->input("reader-id");
@@ -171,6 +178,7 @@ class ReaderController extends BaseController {
         return redirect('/admin/readerDetail?id='.$id)->with("msg", "保存成功！");
     }
 
+    //读者证挂失
     public function readerLoss(Request $request)
     {
         $username = $request->session()->get("username");
@@ -187,6 +195,7 @@ class ReaderController extends BaseController {
         }
     }
 
+    //读者证挂失处理
     public function readerLossAction(Request $request)
     {
         $id = $request->input('reader-id');
@@ -195,11 +204,13 @@ class ReaderController extends BaseController {
         {
             return redirect('/admin/readerLoss')->with("msg", "该读者证不存在，请重试！");
         }
+        //将读者证的loss字段标记为true
         $reader['loss'] = true;
         $reader->save();
         return redirect('/admin/readerLoss')->with("msg", "读者证".$id."挂失成功！");
     }
 
+    //读者证解挂页面
     public function readerFound(Request $request)
     {
         $username = $request->session()->get("username");
@@ -216,6 +227,7 @@ class ReaderController extends BaseController {
         }
     }
 
+    //读者证解挂处理
     public function readerFoundAction(Request $request)
     {
         $id = $request->input('reader-id');
