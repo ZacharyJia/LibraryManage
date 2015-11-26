@@ -7,7 +7,7 @@
 </head>
 <body>
 <?php include('nav.php'); ?>
-<div class="col-sm-10">
+<div class="col-sm-12">
 
     <table class="table table-hover">
         <thead>

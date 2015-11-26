@@ -11,6 +11,8 @@ namespace app\Http\Controllers\Reader;
 use App\Book;
 use App\Borrow;
 use App\Category;
+use App\Level;
+use App\Reader;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
@@ -26,7 +28,13 @@ class IndexController extends BaseController {
     public function home(Request $request)
     {
         $username = $request->session()->get("username");
-        return view("/reader/home", ['username' => $username]);
+        $reader = Reader::find($request->session()->get("reader-id"));
+        $levels = Level::all();
+        $borrows = Borrow::where("reader-id", "=", $reader['reader-id'])
+                    ->where('loss', '=', false)
+                    ->where('returned', '=', false)
+                    ->get();
+        return view("/reader/home", ['username' => $username, 'reader' => $reader, 'levels' => $levels, 'borrows' => $borrows]);
     }
 
     //普通搜索，提供一个关键字，在多个字段中搜索
@@ -35,6 +43,11 @@ class IndexController extends BaseController {
         $num = 10;
         $username = $request->session()->get("username");
         $keyword = $request->input("keyword");
+
+        if($keyword == "")
+        {
+            return redirect('/');
+        }
 
         //生成查询
         $books = Book::where('book-name', 'like', '%'.$keyword.'%')

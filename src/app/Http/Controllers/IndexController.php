@@ -52,7 +52,7 @@ class IndexController extends BaseController
             //读者用户
             else if($user['type'] == 1)
             {
-
+                $request->session()->put("reader-id", $user['reader-id']);
                 return redirect('/reader/home');
             }
         }

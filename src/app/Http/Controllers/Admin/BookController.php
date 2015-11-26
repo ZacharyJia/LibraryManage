@@ -149,6 +149,11 @@ class BookController extends BaseController {
         $category = $request->input("category");
         $isbn = $request->input("isbn");
 
+        if($name == "" || $author == "" || $publishing == "" || $price == "" || $quantity_in == "" || $category == "" || $isbn == "")
+        {
+            return redirect('/admin/bookIn')->with("msg", "参数错误，请检查！");
+        }
+
         $book = new Book();
         $book['book-name'] = $name;
         $book['author'] = $author;

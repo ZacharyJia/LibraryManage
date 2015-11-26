@@ -8,7 +8,7 @@
 <body>
 <?php include('nav.php'); ?>
 
-<div class="col-sm-10">
+<div class="col-sm-12">
     <table class="table table-hover">
         <thead>
         <th>图书名称</th><th>ISBN</th><th>借阅日期</th><th>应还日期</th><th>归还日期</th><th>是否归还</th><th>是否丢失</th>

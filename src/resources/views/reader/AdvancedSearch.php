@@ -7,7 +7,7 @@
 </head>
 <body>
 <?php include('nav.php'); ?>
-<div class="col-sm-10">
+<div class="col-sm-12">
     <form class="form-horizontal" action="advancedSearchAction" method="post">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
         <div class="form-group">

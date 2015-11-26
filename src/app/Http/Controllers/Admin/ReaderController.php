@@ -56,6 +56,15 @@ class ReaderController extends BaseController {
         $username = $request->input("username");
         $password = md5($request->input('password')."zachary");
 
+        if ($sex != '男' && $sex != '女'){
+            return redirect('/admin/cardCreate')->with("msg", "参数错误，请重试");
+        }
+        if($reader_name == "" || $sex == "" || $birthday == "" || $phone == ""
+            || $mobile == "" || $card_name == "" || $card_id == "" || $level == "" || $username == "" || $password == "")
+        {
+            return redirect('/admin/cardCreate')->with("msg", "参数错误，请重试");
+        }
+
         //为了防止出现数据不一致的情况，使用事务进行处理
         //如果出现错误的话，就将操作回滚，正常则提交
         DB::beginTransaction();
