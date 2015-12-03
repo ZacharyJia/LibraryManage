@@ -122,4 +122,40 @@ class IndexController extends BaseController {
         return view('/reader/history', ['username' => $username, 'borrows' => $borrows]);
     }
 
+    //个人信息显示
+    public function info(Request $request)
+    {
+        $username = $request->session()->get("username");
+        $user = User::where('username', '=', $username)->first();
+        if($user == null)
+        {
+            return redirect('home');
+        }
+        $reader = Reader::find($user['reader-id']);
+        $levels = Level::all();
+
+        return view('/reader/info', ['username' => $username, 'user' => $user, 'reader' => $reader, 'levels' => $levels]);
+    }
+
+    //个人信息修改保存
+    public function infoSave(Request $request)
+    {
+        $username = $request->session()->get("username");
+        $user = User::where('username', '=', $username)->first();
+        if($user == null)
+        {
+            return redirect('home');
+        }
+        $reader = Reader::find($user['reader-id']);
+
+        $reader['reader-name'] = $request->input("reader-name");
+        $reader['sex'] = $request->input("sex");
+        $reader['birthday'] = $request->input("birthday");
+        $reader['phone'] = $request->input('phone');
+        $reader['mobile'] = $request->input('mobile');
+
+        $reader->save();
+
+        return redirect('/reader/info');
+    }
 }

@@ -20,6 +20,8 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="history">借阅历史</a></li>
+                <li><a href="info">个人信息</a></li>
+                <li><a href="history">修改密码</a></li>
                 <li><a>您好，<?php echo $username; ?></a></li>
                 <li><a href="../logoutAction">退出登录</a></li>
                 </li>

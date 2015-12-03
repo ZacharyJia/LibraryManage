@@ -100,4 +100,8 @@ Route::group(['prefix' => 'reader', 'middleware'=>['UserAuth']], function()
 
     route::any('history', 'Reader\IndexController@history');
 
+    route::any('info', 'Reader\IndexController@info');
+
+    route::any('infoSave', 'Reader\IndexController@infoSave');
+
 });
