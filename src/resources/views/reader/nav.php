@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/reader/history">借阅历史</a></li>
+                <li><a href="history">借阅历史</a></li>
                 <li><a>您好，<?php echo $username; ?></a></li>
                 <li><a href="../logoutAction">退出登录</a></li>
                 </li>
