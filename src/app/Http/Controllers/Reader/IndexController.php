@@ -158,4 +158,48 @@ class IndexController extends BaseController {
 
         return redirect('/reader/info');
     }
+
+    //修改密码页面
+    public function changePassword(Request $request)
+    {
+        $username = $request->session()->get("username");
+        $msg = $request->session()->get("msg");
+
+        $view = view('/reader/password', ['username' => $username]);
+        if ($msg == null)
+        {
+            return $view;
+        }
+        else
+        {
+            return $view->with("msg", $msg);
+        }
+
+    }
+
+    //修改密码
+    public function changePasswordAction(Request $request)
+    {
+        $username = $request->session()->get("username");
+
+        $old_pass = md5($request->input('old-password')."zachary");
+        $password = md5($request->input("password")."zachary");
+
+        $user = User::where('username', '=', $username)->first();
+        if($user == null)
+        {
+            return redirect('home');
+        }
+        if($user['password'] == $old_pass) {
+            $user['password'] = $password;
+            $user->save();
+            return redirect('/reader/changePassword')->with("msg", "修改成功！");
+        }
+        else {
+            return redirect('/reader/changePassword')->with("msg", "原密码不正确，修改失败！");
+        }
+
+
+    }
+
 }

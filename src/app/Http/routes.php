@@ -104,4 +104,8 @@ Route::group(['prefix' => 'reader', 'middleware'=>['UserAuth']], function()
 
     route::any('infoSave', 'Reader\IndexController@infoSave');
 
+    route::any('changePassword', 'Reader\IndexController@changePassword');
+
+    route::any('changePasswordAction', 'Reader\IndexController@changePasswordAction');
+
 });

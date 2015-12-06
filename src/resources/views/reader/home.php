@@ -22,8 +22,8 @@
     <div class="well col-sm-3">
         您的读者号为：<?php echo $reader['reader-id']; ?> <br />
         您的读者等级为：<?php echo $reader['level']; ?> <br />
-        您共可以借书：<?php echo $level['days']; ?> 本 <br />
-        您每次可以借书：<?php echo $level['numbers']; ?>天<br />
+        您共可以借书：<?php echo $level['numbers']; ?> 本 <br />
+        您每次可以借书：<?php echo $level['days']; ?>天<br />
     </div>
 
     <div class="col-sm-12">
