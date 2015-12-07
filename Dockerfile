@@ -12,6 +12,11 @@ RUN docker-php-ext-install openssl
 
 RUN cp /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/
 
-COPY src/ /var/www/html/
+RUN mkdir /var/www/libsystem
+COPY src/ /var/www/libsystem
+
+RUN rm -r /var/www/html
+
+RUN ln -s /var/www/libsystem/public/ /var/www/html/
 
 RUN cd /var/www/ && chmod -R 777 html
