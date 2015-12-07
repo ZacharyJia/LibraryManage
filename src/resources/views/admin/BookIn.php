@@ -13,7 +13,7 @@
             dataType: 'json',
             success:function(data){
                 $('#name').val(data.title);
-                $('#author').val(data.author.join(','));
+                $('#author').val(data.author.join('、'));
                 $('#publishing').val(data.publisher);
                 $('#price').val(data.price.replace('元', ""));
             }
