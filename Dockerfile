@@ -14,10 +14,9 @@ RUN cp /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/
 
 RUN mkdir /var/www/libsystem
 COPY src/ /var/www/libsystem
+COPY init.sh /var/www
 
-RUN rm -r /var/www/html
-
-RUN cd /var/www/
-RUN ln -s libsystem/public/ html
+RUN chmod 777 /var/www/init.sh
+RUN cd /var/www/ && ./init.sh
 
 RUN cd /var/www/ && chmod -R 777 libsystem
