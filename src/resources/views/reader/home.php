@@ -7,7 +7,7 @@
 </head>
 <body>
 <?php include('nav.php'); ?>
-<div class="col-sm-12">
+<div class="col-sm-12" style="padding-bottom: 80px">
     <?php
     $level = null;
     foreach ($levels as $l)
@@ -48,5 +48,6 @@
         </table>
     </div>
 </div>
+<?php include('footer.php');?>
 </body>
 </html>

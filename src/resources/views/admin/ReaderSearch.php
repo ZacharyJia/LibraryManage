@@ -9,7 +9,7 @@
 <body>
 <?php include('nav.php'); ?>
 
-<div class="col-sm-10">
+<div class="col-sm-10" style="padding-bottom: 80px">
     <div class="col-sm-12">
         <h1 class="text-center">读者查询</h1>
     </div>
@@ -36,5 +36,6 @@
 
     </form>
 </div>
+<?php include('footer.php');?>
 </body>
 </html>

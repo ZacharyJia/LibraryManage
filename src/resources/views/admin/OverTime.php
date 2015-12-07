@@ -7,7 +7,7 @@
 </head>
 <body>
 <?php include('nav.php'); ?>
-<div class="col-sm-10">
+<div class="col-sm-10" style="padding-bottom: 80px">
     <table class="table table-hover">
         <thead>
         <th>图书名称</th><th>ISBN</th><th>读者证号</th><th>读者名称</th><th>借阅日期</th><th>应还日期</th>
@@ -36,5 +36,6 @@
 
 
 </div>
+<?php include('footer.php');?>
 </body>
 </html>

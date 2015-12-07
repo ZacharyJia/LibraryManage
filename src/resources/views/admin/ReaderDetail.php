@@ -7,7 +7,7 @@
 </head>
 <body>
 <?php include('nav.php'); ?>
-<div class="col-sm-10">
+<div class="col-sm-10" style="padding-bottom: 80px">
     <div class="col-sm-offset-2 col-sm-6">
         <?php
         if (isset($msg))
@@ -110,5 +110,6 @@
 
 
 </div>
+<?php include('footer.php');?>
 </body>
 </html>

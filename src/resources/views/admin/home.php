@@ -7,7 +7,7 @@
 </head>
 <body>
 <?php include('nav.php'); ?>
-<div class="col-sm-10">
+<div class="col-sm-10" style="padding-bottom: 80px">
     <h2>常用功能</h2>
     <div class="col-sm-3">
         <a href="bookBorrow" class="btn btn-success btn-lg btn-block">图书借阅</a>
@@ -24,5 +24,6 @@
 
 
 </div>
+<?php include('footer.php');?>
 </body>
 </html>

@@ -7,7 +7,7 @@
 </head>
 <body>
 <?php include('nav.php'); ?>
-<div class="col-sm-12">
+<div class="col-sm-12" style="padding-bottom: 80px">
     <form class="form-horizontal" action="infoSave" method="post">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
         <div class="form-group">
@@ -102,5 +102,8 @@
 
     </form>
 </div>
+<?php
+include('footer.php');
+?>
 </body>
 </html>

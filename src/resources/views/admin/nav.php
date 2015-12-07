@@ -19,7 +19,7 @@
 </nav>
 
 
-<div class="panel-group col-sm-2" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="panel-group col-sm-2" id="accordion" role="tablist" aria-multiselectable="true" style="padding-bottom: 80px">
     <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingOne">
             <h4 class="panel-title">

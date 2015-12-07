@@ -7,3 +7,7 @@
 <script src="../js/bootstrap.min.js"></script>
 
 <script src="../js/bootstrap-datetimepicker.min.js"></script>
+
+<style>
+    body { padding-bottom: 70px; }
+</style>
