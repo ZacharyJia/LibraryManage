@@ -17,6 +17,6 @@ COPY src/ /var/www/libsystem
 
 RUN rm -r /var/www/html
 
-RUN ln -s /var/www/libsystem/public/ /var/www/html/
+RUN ln -s /var/www/libsystem/public/ /var/www/html
 
 RUN cd /var/www/ && chmod -R 777 libsystem
