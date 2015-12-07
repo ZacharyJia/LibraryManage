@@ -24,6 +24,22 @@ class BookController extends BaseController {
         date_default_timezone_set("Asia/Harbin");
     }
 
+    public function getBookInfo(Request $request)
+    {
+        $isbn = $request->input('isbn');
+        if($isbn == "")
+        {
+            return view('api', ['msg' => ""]);
+        }
+
+        $url = 'https://api.douban.com/v2/book/isbn/:'.$isbn;
+
+        $json_data = file_get_contents($url);
+        $array = json_decode($json_data,true);
+
+        return view('api', ['msg' => $json_data]);
+    }
+
 
     //图书搜索界面显示
     public function bookSearch(Request $request)

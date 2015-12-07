@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <title>图书管理系统——图书入库</title>
     <?php include('admin/import.php'); ?>
+    <script>
+    function getBookInfo(isbn)
+    {
+        $.ajax({
+            type:'GET',
+            url:'getBookInfo?isbn=' + isbn,
+            dataType: 'json',
+            success:function(data){
+                $('#name').val(data.title);
+                $('#author').val(data.author.join(','));
+                $('#publishing').val(data.publisher);
+                $('#price').val(data.price.replace('元', ""));
+            }
+        });
+    }
+    </script>
 </head>
 <body>
 <?php include('nav.php'); ?>
@@ -25,15 +41,16 @@
     <form class="col-sm-12 form-horizontal" method="post" action="bookInAction">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
         <div class="form-group">
+            <label for="isbn" class="col-sm-2 control-label">ISBN</label>
+            <div class="col-sm-7">
+                <input onblur="getBookInfo(this.value)" type="text" class="form-control" id="isbn" name="isbn" placeholder="ISBN">
+            </div>
+        </div>
+
+        <div class="form-group">
             <label for="name" class="col-sm-2 control-label">图书名称</label>
             <div class="col-sm-7">
                 <input type="text" class="form-control" id="name" name="name" placeholder="图书名称">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="isbn" class="col-sm-2 control-label">ISBN</label>
-            <div class="col-sm-7">
-                <input type="text" class="form-control" id="isbn" name="isbn" placeholder="ISBN">
             </div>
         </div>
 
