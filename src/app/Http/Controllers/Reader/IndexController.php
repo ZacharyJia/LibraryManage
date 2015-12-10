@@ -51,8 +51,8 @@ class IndexController extends BaseController {
 
         //生成查询
         $books = Book::where('book-name', 'like', '%'.$keyword.'%')
-                    ->where('author', 'like', '%'.$keyword.'%')
-                    ->where('isbn', 'like', '%'.$keyword.'%')
+                    ->orwhere('author', 'like', '%'.$keyword.'%')
+                    ->orwhere('isbn', 'like', '%'.$keyword.'%')
                     ->paginate($num);
         $books->appends(['keyword' => $keyword]);
 
